@@ -1,0 +1,49 @@
+# Node.js and npm
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Next.js build files
+/.next/
+/.vercel/
+
+# Editor-specific files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+*.user
+*.suo
+*.DLL
+*.log
+
+# Environment variables
+.env.local
+.env.development
+.env.production
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# Recycle Bin used on file shares
+$RECYCLE.BIN/
+
+# VS Code folders
+.vscode/
+
+# Next.js telemetry
+.next/
+
