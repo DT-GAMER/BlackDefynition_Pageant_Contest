@@ -24,6 +24,8 @@ yarn-error.log
 .env.local
 .env.development
 .env.production
+.env
+.babelrc
 
 # macOS
 .DS_Store
