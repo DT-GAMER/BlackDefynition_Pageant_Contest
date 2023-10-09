@@ -7,7 +7,7 @@ const errorHandlers = require('../utils/errorHandlers');
 const authController = require('../controllers/authController');
 
 // Route for user registration
-router.post('/register', authController.register);
+router.post('/signup', authController.register);
 
 // Route for user login
 router.post('/login', authController.login);

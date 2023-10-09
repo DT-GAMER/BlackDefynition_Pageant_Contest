@@ -8,13 +8,13 @@ const errorHandlers = require('../utils/errorHandlers');
 const pollController = require('../controllers/pollController');
 
 // Route for creating a new poll
-router.post('/create', pollController.createPoll);
+router.post('/contest', pollController.createPoll);
 
 // Route for listing all polls
-router.get('/list', pollController.listPolls);
+router.get('/voting', pollController.listPolls);
 
 // Route for updating a poll
-router.put('/update/:pollId', pollController.updatePoll);
+router.put('/results/:pollId', pollController.updatePoll);
 
 module.exports = router;
 

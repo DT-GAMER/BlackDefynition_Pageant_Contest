@@ -1,7 +1,7 @@
 const Poll = require('../models/poll');
 
 // Create a new poll
-exports.createPoll = async (req, res) => {
+exports.createcontest = async (req, res) => {
   try {
     const { title, choices } = req.body;
 
@@ -26,7 +26,7 @@ exports.createPoll = async (req, res) => {
 };
 
 // List all polls
-exports.listPolls = async (req, res) => {
+exports.listvoting = async (req, res) => {
   try {
     const polls = await Poll.find();
 
@@ -38,7 +38,7 @@ exports.listPolls = async (req, res) => {
 };
 
 // Update a poll
-exports.updatePoll = async (req, res) => {
+exports.updateresults = async (req, res) => {
   try {
     const { pollId } = req.params;
     const { choices } = req.body;

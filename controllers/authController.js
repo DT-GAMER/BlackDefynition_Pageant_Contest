@@ -4,7 +4,7 @@ const bcrypt = require('bcrypt');
 const config = require('../config/jwt'); // JWT configuration
 
 // User registration
-exports.register = async (req, res) => {
+exports.signup = async (req, res) => {
   try {
     const { name, email, password } = req.body;
 

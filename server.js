@@ -41,9 +41,9 @@ const userRoutes = require('./routes/userRoutes');
 const notificationRoutes = require('./routes/notificationRoutes');
 
 app.use('/api/auth', authRoutes);
-app.use('/api/polls', pollRoutes);
+app.use('/api/contest', pollRoutes);
 app.use('/api/vote', voteRoutes);
-app.use('/api/users', userRoutes);
+app.use('/api/profile', userRoutes);
 app.use('/api/notifications', notificationRoutes);
 
 // Error handling middleware
