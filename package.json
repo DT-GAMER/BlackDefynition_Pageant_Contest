@@ -1,8 +1,8 @@
 {
   "name": "BlackDefynition_Pageant_Contest",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "A pageant contest project",
+  "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
