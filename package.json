@@ -1,10 +1,10 @@
 {
   "name": "BlackDefynition_Pageant_Contest",
   "version": "1.0.0",
-  "description": "A pageant contest project",
+  "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ech+o \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
@@ -28,14 +28,7 @@
     "helmet": "^7.0.0",
     "jsonwebtoken": "^9.0.2",
     "mongodb": "^6.1.0",
-    "mongoose": "^7.5.4",
-    "morgan": "^1.10.0",
-    "nodemailer": "^6.9.5"
-  },
-  "devDependencies": {
-    "@babel/core": "^7.23.0",
-    "@babel/node": "^7.22.19",
-    "@babel/plugin-proposal-optional-chaining": "^7.21.0",
-    "@babel/preset-env": "^7.22.20"
+    "mongoose": "^7.6.0",
+    "morgan": "^1.10.0"
   }
 }

@@ -1,21 +1,20 @@
 const mongoose = require('mongoose');
 
 const voteSchema = new mongoose.Schema({
-  userId: {
+  voter: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true,
   },
-  pollId: {
+  contestant: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Poll',
+    ref: 'Contestant',
     required: true,
   },
-  choiceIndex: {
-    type: Number,
-    required: true,
+  createdAt: {
+    type: Date,
+    default: Date.now,
   },
-  
 });
 
 const Vote = mongoose.model('Vote', voteSchema);

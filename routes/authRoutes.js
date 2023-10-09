@@ -1,16 +1,16 @@
 const express = require('express');
 const router = express.Router();
-const authenticationMiddleware = require('../middlewares/authentication');
-const authorizationMiddleware = require('../middlewares/authorization');
-const validation = require('../utils/validation');
-const errorHandlers = require('../utils/errorHandlers');
-const authController = require('../controllers/authController');
+const authController = require('../controller/authController');
+const authMiddleware = require('../middleware/authMiddleware');
 
-// Route for user registration
-router.post('/signup', authController.register);
+// Authentication routes
+router.post('/signup/voter', authController.signupVoter);
+router.post('/signup/contestant', authController.signupContestant);
+router.post('/login/voter', authController.loginVoter);
+router.post('/login/contestant', authController.loginContestant);
 
-// Route for user login
-router.post('/login', authController.login);
+// Protect the following routes with authentication middleware
+router.use(authMiddleware);
 
 module.exports = router;
 

@@ -1,16 +1,17 @@
 const mongoose = require('mongoose');
 
-// Connect to MongoDB database
-mongoose.connect(process.env.MONGODB_URI, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-  useCreateIndex: true,
-});
+const { mongoUserName, password, clusterName, dbName } = process.env;
+const mongoDB_URI = `mongodb+srv://${mongoUserName}:${password}@${clusterName}.glawdte.mongodb.net/${dbName}?retryWrites=true&w=majority`;
 
-const db = mongoose.connection;
+mongoose.connect(mongoDB_URI, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+})
+    .then(() => console.log("Database connected!"))
+    .catch((err) => console.log(`Error connecting to database! `, err));
 
-db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-db.once('open', () => {
-  console.log('Connected to the database');
-});
+
+app.get("/", (req, res) => {
+    res.send("BlackDefynition Pageant Contest App is online!");
+})
 
