@@ -6,7 +6,7 @@ const options = {
     info: {
       title: 'Pageant Voting System API',
       version: '1.0.0',
-      description: 'API documentation for the Pageant Voting System',
+      description: 'API documentation for BlackDefynition Pageant Voting System',
     },
   },
   apis: ['./routes/*.js'],
