@@ -96,8 +96,4 @@ Contributions to this project are welcome! To contribute, follow these steps:
 
 Please make sure to follow the project's coding standards and guidelines.
 
-## License
 
-This project is licensed under the MIT License.
-
-You can copy and paste this content into your `README.md` file in your GitHub repository, and it should provide a clear and organized structure for your project's documentation.
