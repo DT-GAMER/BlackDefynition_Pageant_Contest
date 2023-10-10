@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const adminController = require('../controller/adminController');
-//const authMiddleware = require('../middleware/authMiddleware');;
+const authMiddleware = require('../middleware/authMiddleware');;
 
 // Admin-related routes (authentication and authorization required)
 /**
@@ -58,7 +58,7 @@ router.post('/login/admin', adminController.loginAdmin);
 
 
 // Protect the following routes with authentication middleware
-//router.use(authMiddleware);
+router.use(authMiddleware);
 
 /**
  * @swagger
