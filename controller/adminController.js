@@ -26,13 +26,8 @@ const adminController = {
       // Save the admin to the database
       await newAdmin.save();
 
-      // Generate a JWT token for authentication
-      const token = jwt.sign({ adminId: newAdmin._id }, process.env.SECRET_KEY, {
-        expiresIn: '1h', // Set the expiration time for the token
-      });
-
       // Send a response with the token
-      res.status(201).json({ token, adminId: newAdmin._id });
+      res.status(201).json({ adminId: newAdmin._id });
     } catch (error) {
       // Handle errors
       console.error(error);
@@ -58,7 +53,7 @@ const adminController = {
 
       // Generate a JWT token for authentication
       const token = jwt.sign({ adminId: admin._id }, process.env.SECRET_KEY, {
-        expiresIn: '1h', // Set the expiration time for the token
+        // Set the expiration time for the token
       });
 
       // Send a response with the token
