@@ -33,31 +33,6 @@ const contestController = {
     }
   },
 
-  // Create a new category
-  createCategory: async (req, res) => {
-    try {
-      // Extract category data from the request body
-      const { name, description, startTime, endTime, prize } = req.body;
-
-      // Create a new category with provided details
-      const newCategory = new Category({
-        name,
-        description,
-        startTime,
-        endTime,
-        prize,
-      });
-
-      // Save the category to the database
-      await newCategory.save();
-
-      res.status(201).json({ message: 'Category created successfully.', category: newCategory });
-    } catch (error) {
-      // Handle errors
-      console.error(error);
-      res.status(500).json({ error: 'An error occurred while creating the category.' });
-    }
-  },
 
   // Vote for a contestant
   voteForContestant: async (req, res) => {

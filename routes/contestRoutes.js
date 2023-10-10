@@ -47,38 +47,6 @@ router.use(authMiddleware);
 
 /**
  * @swagger
- * /categories:
- *   post:
- *     summary: Create a new contest category
- *     tags:
- *       - Contest
- *     requestBody:
- *       required: true
- *       content:
- *         application/json:
- *           schema:
- *             type: object
- *             properties:
- *               name:
- *                 type: string
- *               description:
- *                 type: string
- *               startTime:
- *                 type: string
- *               endTime:
- *                 type: string
- *               prize:
- *                 type: string
- *     responses:
- *       200:
- *         description: Category created successfully
- *       400:
- *         description: Bad request (e.g., invalid input)
- */
-router.post('/categories', contestController.createCategory);
-
-/**
- * @swagger
  * /categories/{categoryId}/vote:
  *   post:
  *     summary: Vote for a contestant in a category
