@@ -26,7 +26,7 @@ Follow these steps to set up the BlackDefynition Pageant Contest application loc
 1. Clone the repository to your local machine:
 
 ```
-git clone https://github.com/yourusername/BlackDefynition_Pageant_Contest.git
+git clone https://github.com/DT-GAMER/BlackDefynition_Pageant_Contest.git
 cd BlackDefynition_Pageant_Contest
 ```
 
