@@ -32,6 +32,8 @@ app.get("/", (req, res) => {
     res.send("BlackDefynition Pageant Contest App is online!");
 })
 
+const swaggerRoutes = require('./routes/swaggerRoutes');
+app.use('/api-docs', swaggerRoutes);
 
 // Middleware
 app.use(cors());
