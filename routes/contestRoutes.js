@@ -7,7 +7,7 @@ const authMiddleware = require('../middleware/authMiddleware'); // Import the au
 
 /**
  * @swagger
- * /api/categories:
+ * /categories:
  *   get:
  *     summary: Get all contest categories
  *     tags:
@@ -22,7 +22,7 @@ router.get('/categories', contestController.getAllCategories);
 
 /**
  * @swagger
- * /api/categories/{categoryId}/contestants:
+ * /categories/{categoryId}/contestants:
  *   get:
  *     summary: Get contestants by category
  *     tags:
@@ -47,7 +47,7 @@ router.use(authMiddleware);
 
 /**
  * @swagger
- * /api/categories:
+ * /categories:
  *   post:
  *     summary: Create a new contest category
  *     tags:
@@ -79,7 +79,7 @@ router.post('/categories', contestController.createCategory);
 
 /**
  * @swagger
- * /api/categories/{categoryId}/vote:
+ * /categories/{categoryId}/vote:
  *   post:
  *     summary: Vote for a contestant in a category
  *     tags:

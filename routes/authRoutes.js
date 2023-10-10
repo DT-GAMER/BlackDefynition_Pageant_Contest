@@ -6,7 +6,7 @@ const authMiddleware = require('../middleware/authMiddleware');
 // Authentication routes
 /**
  * @swagger
- * /api/auth/signup/voter:
+ * /auth/signup/voter:
  *   post:
  *     summary: Sign up as a voter
  *     tags:
@@ -34,7 +34,7 @@ router.post('/signup/voter', authController.signupVoter);
 
 /**
  * @swagger
- * /api/auth/signup/contestant:
+ * /auth/signup/contestant:
  *   post:
  *     summary: Sign up as a contestant
  *     tags:
@@ -67,7 +67,7 @@ router.post('/signup/contestant', authController.signupContestant);
 
 /**
  * @swagger
- * /api/auth/login/voter:
+ * /auth/login/voter:
  *   post:
  *     summary: Log in as a voter
  *     tags:
@@ -93,7 +93,7 @@ router.post('/login/voter', authController.loginVoter);
 
 /**
  * @swagger
- * /api/auth/login/contestant:
+ * /auth/login/contestant:
  *   post:
  *     summary: Log in as a contestant
  *     tags:
