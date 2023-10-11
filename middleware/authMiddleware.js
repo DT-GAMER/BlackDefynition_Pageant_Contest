@@ -15,9 +15,17 @@ const authMiddleware = (req, res, next) => {
     // Continue to the next middleware or route handler
     next();
   } catch (error) {
-    return res.status(401).json({ error: 'Authentication failed.' });
+    // allow access for signup routes.
+    if (req.originalUrl.includes('/auth/signup')) {
+      // If the request URL includes '/auth/signup', allow access without authentication.
+      next();
+    } else {
+      // For all other routes, return an authentication failed error.
+      return res.status(401).json({ error: 'Authentication failed.' });
+    }
   }
 };
 
 module.exports = authMiddleware;
+
 
