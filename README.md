@@ -63,7 +63,6 @@ Your application should now be running at [http://localhost:3000](http://localho
 
 - `/contest/categories`: Get all contest categories.
 - `/contest/categories/:categoryId/contestants`: Get contestants by category.
-- `/contest/categories`: Create a new category (Admin privilege required).
 - `/contest/categories/:categoryId/vote`: Vote for a contestant (Authenticated voter privilege required).
 
 ### Admin Operations
