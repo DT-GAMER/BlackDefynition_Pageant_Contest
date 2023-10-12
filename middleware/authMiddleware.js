@@ -16,7 +16,7 @@ const authMiddleware = (req, res, next) => {
     next();
   } catch (error) {
     // allow access for signup routes.
-    if (req.originalUrl.includes('/auth/signup')) {
+    if (req.originalUrl.includes('/admin/signup')) {
       // If the request URL includes '/auth/signup', allow access without authentication.
       next();
     } else {
