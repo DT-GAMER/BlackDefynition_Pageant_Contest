@@ -62,7 +62,7 @@ router.use(authMiddleware);
 
 /**
  * @swagger
- * admin/categories:
+ * /admin/categories:
  *   post:
  *     summary: Create a new contest category (Admin only)
  *     tags:
@@ -98,7 +98,7 @@ router.post('/categories', adminController.createCategory);
 
 /**
  * @swagger
- * admin/categories/{categoryId}/end:
+ * /admin/categories/{categoryId}/end:
  *   post:
  *     summary: End voting for a category (Admin only)
  *     tags:
@@ -123,7 +123,7 @@ router.post('/categories/:categoryId/end', adminController.endCategoryVoting);
 
 /**
  * @swagger
- * admin/categories/{categoryId}/results:
+ * /admin/categories/{categoryId}/results:
  *   get:
  *     summary: View voting results for a category (Admin only)
  *     tags:
