@@ -6,7 +6,7 @@ const authMiddleware = require('../middleware/authMiddleware');;
 // Admin-related routes (authentication and authorization required)
 /**
  * @swagger
- * /auth/signup/admin:
+ * /admin/signup/admin:
  *   post:
  *     summary: Sign up as an admin
  *     tags:
@@ -32,7 +32,7 @@ router.post('/signup/admin', adminController.signupAdmin);
 
 /**
  * @swagger
- * /auth/login/admin:
+ * /admin/login/admin:
  *   post:
  *     summary: Log in as an admin
  *     tags:
@@ -62,7 +62,7 @@ router.use(authMiddleware);
 
 /**
  * @swagger
- * /categories:
+ * admin/categories:
  *   post:
  *     summary: Create a new contest category (Admin only)
  *     tags:
@@ -98,7 +98,7 @@ router.post('/categories', adminController.createCategory);
 
 /**
  * @swagger
- * /categories/{categoryId}/end:
+ * admin/categories/{categoryId}/end:
  *   post:
  *     summary: End voting for a category (Admin only)
  *     tags:
@@ -123,7 +123,7 @@ router.post('/categories/:categoryId/end', adminController.endCategoryVoting);
 
 /**
  * @swagger
- * /categories/{categoryId}/results:
+ * admin/categories/{categoryId}/results:
  *   get:
  *     summary: View voting results for a category (Admin only)
  *     tags:
