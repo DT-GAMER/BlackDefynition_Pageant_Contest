@@ -68,8 +68,8 @@ const adminController = {
       res.status(500).json({ error: 'An error occurred during admin login.' });
     }
   },
-
-  // Configure Multer to handle file uploads
+  
+// Configure Multer to handle file uploads
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     // Define the path to store uploaded images
@@ -122,6 +122,7 @@ const storage = multer.diskStorage({
     res.status(500).json({ error: 'An error occurred while creating the category.' });
   }
 });
+
 
   // End voting for a category (admin privilege required)
   endCategoryVoting: async (req, res) => {
