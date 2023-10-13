@@ -2,6 +2,7 @@ const Admin = require('../models/Admin');
 const Category = require('../models/Category');
 const jwt = require('jsonwebtoken');
 const upload = multer({ storage: storage });
+const multer = require('multer');
 
 const adminController = {
   // Admin Signup
@@ -70,7 +71,6 @@ const adminController = {
   },
 
   // Create a new category (admin privilege required)
- const multer = require('multer');
 
 // Configure multer to handle file uploads
 const storage = multer.diskStorage({
