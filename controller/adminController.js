@@ -1,7 +1,8 @@
 const Admin = require('../models/Admin');
 const Category = require('../models/Category');
 const jwt = require('jsonwebtoken');
-const multer = require('multer');
+const cloudinary = require('cloudinary').v2;
+const fileUpload = require('express-fileupload');
 
 const adminController = {
   // Admin Signup
@@ -68,60 +69,51 @@ const adminController = {
       res.status(500).json({ error: 'An error occurred during admin login.' });
     }
   },
-  
-// Configure Multer to handle file uploads
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    // Define the path to store uploaded images
-    cb(null, 'uploads/');
-  },
-  filename: function (req, file, cb) {
-    // Define the image file name syntax
-    cb(null, Date.now() + '-' + file.originalname);
-  },
-});
 
-    // Create a new category (admin privilege required)
-    const upload = multer({ storage: storage });
-
-    // Update the route handler to handle file uploads
-    app.post('/contest/categories', upload.single('categoryImage'), async (req, res) => {
+  createCategory: async (req, res) => {
     try {
-    // Validate admin authentication
-    const token = req.headers.authorization.split(' ')[1]; // Extract the token from the request header
-    const decodedToken = jwt.verify(token, process.env.SECRET_KEY); // Verify the token
+      // Validate admin authentication
+      const token = req.headers.authorization.split(' ')[1]; // Extract the token from the request header
+      const decodedToken = jwt.verify(token, process.env.SECRET_KEY); // Verify the token
 
-    // Check if the decoded token contains adminId
-    if (!decodedToken || !decodedToken.adminId) {
-      return res.status(401).json({ error: 'Authentication failed.' });
+      // Check if the decoded token contains adminId
+      if (!decodedToken || !decodedToken.adminId) {
+        return res.status(401).json({ error: 'Authentication failed.' });
+      }
+
+      // Extract category data from the request body
+      const { name, description, startTime, endTime, prize } = req.body;
+
+      // Check if an image file is included in the request
+      if (!req.files || !req.files.categoryImage) {
+        return res.status(400).json({ error: 'Image file is required.' });
+      }
+
+      const categoryImage = req.files.categoryImage; // Get the uploaded image
+
+      // Upload the image to Cloudinary
+      const cloudinaryResponse = await cloudinary.uploader.upload(categoryImage.tempFilePath);
+
+      // Create a new category with provided details and Cloudinary image URL
+      const newCategory = new Category({
+        name,
+        description,
+        startTime,
+        endTime,
+        prize,
+        imageUrl: cloudinaryResponse.secure_url,
+     });
+
+      // Save the category to the database
+      await newCategory.save();
+
+      res.status(201).json({ message: 'Category created successfully.', category: newCategory });
+    } catch (error) {
+      // Handle errors
+      console.error(error);
+      res.status(500).json({ error: 'An error occurred while creating the category.' });
     }
-
-    // Extract category data from the request body
-    const { name, description, startTime, endTime, prize } = req.body;
-
-    // Extract the file path of the uploaded image
-    const imageFilePath = req.file.path;
-
-    // Create a new category with provided details and image path
-    const newCategory = new Category({
-      name,
-      description,
-      startTime,
-      endTime,
-      prize,
-      image: imageFilePath,
-    });
-
-    // Save the category to the database
-    await newCategory.save();
-
-    res.status(201).json({ message: 'Category created successfully.', category: newCategory });
-  } catch (error) {
-    // Handle errors
-    console.error(error);
-    res.status(500).json({ error: 'An error occurred while creating the category.' });
-  }
-});
+  },
 
 
   // End voting for a category (admin privilege required)

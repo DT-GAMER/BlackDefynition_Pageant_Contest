@@ -21,7 +21,7 @@ const categorySchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  categoryImage: {
+  imageUrl: {
     type: String,
     required: true,
   },
