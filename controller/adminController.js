@@ -69,16 +69,14 @@ const adminController = {
     }
   },
 
-  // Create a new category (admin privilege required)
-
-  // Configure multer to handle file uploads
+  // Configure Multer to handle file uploads
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    // Path to store images
+    // Define the path to store uploaded images
     cb(null, 'uploads/');
   },
   filename: function (req, file, cb) {
-    // Image name syntax
+    // Define the image file name syntax
     cb(null, Date.now() + '-' + file.originalname);
   },
 });
