@@ -23,7 +23,7 @@ const authMiddleware = require('../middleware/authMiddleware');;
  *               password:
  *                 type: string
  *     responses:
- *       200:
+ *       201:
  *         description: Admin registration successful
  *       400:
  *         description: Bad request (e.g., invalid input)
@@ -80,6 +80,8 @@ router.use(authMiddleware);
  *                 type: string
  *               description:
  *                 type: string
+ *               imageUrl:
+ *                 type: string
  *               startTime:
  *                 type: string
  *               endTime:
@@ -87,7 +89,7 @@ router.use(authMiddleware);
  *               prize:
  *                 type: string
  *     responses:
- *       200:
+ *       201:
  *         description: Category created successfully
  *       400:
  *         description: Bad request (e.g., invalid input)

@@ -13,8 +13,9 @@ const contestantSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
-  imageURL: {
+  imageUrl: {
     type: String,
+    required:true,
   },
   category: {
     type: mongoose.Schema.Types.ObjectId,

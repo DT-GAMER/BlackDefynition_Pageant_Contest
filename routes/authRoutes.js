@@ -25,7 +25,7 @@ const authMiddleware = require('../middleware/authMiddleware');
  *               password:
  *                 type: string
  *     responses:
- *       200:
+ *       201:
  *         description: Voter registration successful
  *       400:
  *         description: Bad request (e.g., invalid input)
@@ -52,12 +52,12 @@ router.post('/signup/voter', authController.signupVoter);
  *                 type: number
  *               contestName:
  *                 type: string
- *               imageURL:
+ *               imageUrl:
  *                 type: string
  *               category:
  *                 type: string
  *     responses:
- *       200:
+ *       201:
  *         description: Contestant registration successful
  *       400:
  *         description: Bad request (e.g., invalid input)

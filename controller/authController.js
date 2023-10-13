@@ -48,38 +48,44 @@ const authController = {
   signupContestant: async (req, res) => {
     try {
       // Extract contestant registration data from the request body
-      const { name, age, contestName, imageURL, category } = req.body;
+      const { name, age, contestName, imageUrl, category } = req.body;
 
         // Check if the name is already registered
-    const existingContestant = await Contestant.findOne({ name });
+     const existingContestant = await Contestant.findOne({ name });
 
-    if (existingContestant) {
-      return res.status(400).json({ error: 'Contestant name is already registered.' });
-    }
+     if (existingContestant) {
+       return res.status(400).json({ error: 'Contestant name is already registered.' });
+     }
 
-      // Create a new contestant
-      const newContestant = new Contestant({
-        name,
-        age,
-        contestName,
-        imageURL,
-        category,
-      });
+     // Extract the file path of the uploaded image
+     const file = req.files.image;
 
-      // Save the contestant to the database
-      await newContestant.save();
+     // Upload the image to Cloudinary
+     const result = await cloudinary.uploader.upload(file.tempFilePath);
 
-      // Generate a JWT token for authentication
-      const token = jwt.sign({ contestantId: newContestant._id }, process.env.SECRET_KEY, {
-        expiresIn: '1h', // Set the expiration time for the token
-      });
+     // Create a new contestant
+     const newContestant = new Contestant({
+       name,
+       age,
+       contestName,
+       imageUrl,
+       category,
+     });
 
-      // Send a response with the token
-      res.status(201).json({ token, contestantId: newContestant._id });
-    } catch (error) {
-      // Handle errors
-      console.error(error);
-      res.status(500).json({ error: 'An error occurred during contestant signup.' });
+     // Save the contestant to the database
+     await newContestant.save();
+
+     // Generate a JWT token for authentication
+     const token = jwt.sign({ contestantId: newContestant._id }, process.env.SECRET_KEY, {
+       expiresIn: '1h', // Set the expiration time for the token
+     });
+
+     // Send a response with the token
+     res.status(201).json({ token, contestantId: newContestant._id });
+   } catch (error) {
+     // Handle errors
+     console.error(error);
+     res.status(500).json({ error: 'An error occurred during contestant signup.' });
     }
   },
 
