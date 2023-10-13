@@ -1,6 +1,7 @@
 const Admin = require('../models/Admin');
 const Category = require('../models/Category');
 const jwt = require('jsonwebtoken');
+const upload = multer({ storage: storage });
 
 const adminController = {
   // Admin Signup
@@ -54,8 +55,6 @@ const adminController = {
         return res.status(401).json({ error: 'Authentication failed.' });
       }
 
-      // Verify the password (you can add password verification logic specific to admins)
-
       // Generate a JWT token for authentication
       const token = jwt.sign({ adminId: admin._id }, process.env.SECRET_KEY, {
         expiresIn: '1h', // Set the expiration time for the token
@@ -71,39 +70,59 @@ const adminController = {
   },
 
   // Create a new category (admin privilege required)
-  createCategory: async (req, res) => {
-    try {
-      // Validate admin authentication
-      const token = req.headers.authorization.split(' ')[1]; // Extract the token from the request header
-      const decodedToken = jwt.verify(token, process.env.SECRET_KEY); // Verify the token
+ const multer = require('multer');
 
-      // Check if the decoded token contains adminId
-      if (!decodedToken || !decodedToken.adminId) {
-        return res.status(401).json({ error: 'Authentication failed.' });
-      }
-
-      // Extract category data from the request body
-      const { name, description, startTime, endTime, prize } = req.body;
-
-      // Create a new category with provided details
-      const newCategory = new Category({
-        name,
-        description,
-        startTime,
-        endTime,
-        prize,
-      });
-
-      // Save the category to the database
-      await newCategory.save();
-
-      res.status(201).json({ message: 'Category created successfully.', category: newCategory });
-    } catch (error) {
-      // Handle errors
-      console.error(error);
-      res.status(500).json({ error: 'An error occurred while creating the category.' });
-    }
+// Configure multer to handle file uploads
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    // Path to store images
+    cb(null, 'uploads/');
   },
+  filename: function (req, file, cb) {
+    // Image name syntax
+    cb(null, Date.now() + '-' + file.originalname);
+  },
+});
+
+
+// Update the route handler to handle file uploads
+app.post('/contest/categories', upload.single('categoryImage'), async (req, res) => {
+  try {
+    // Validate admin authentication
+    const token = req.headers.authorization.split(' ')[1]; // Extract the token from the request header
+    const decodedToken = jwt.verify(token, process.env.SECRET_KEY); // Verify the token
+
+    // Check if the decoded token contains adminId
+    if (!decodedToken || !decodedToken.adminId) {
+      return res.status(401).json({ error: 'Authentication failed.' });
+    }
+
+    // Extract category data from the request body
+    const { name, description, startTime, endTime, prize } = req.body;
+
+    // Extract the file path of the uploaded image
+    const imageFilePath = req.file.path;
+
+    // Create a new category with provided details and image path
+    const newCategory = new Category({
+      name,
+      description,
+      startTime,
+      endTime,
+      prize,
+      image: imageFilePath,
+    });
+
+    // Save the category to the database
+    await newCategory.save();
+
+    res.status(201).json({ message: 'Category created successfully.', category: newCategory });
+  } catch (error) {
+    // Handle errors
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred while creating the category.' });
+  }
+});
 
   // End voting for a category (admin privilege required)
   endCategoryVoting: async (req, res) => {
