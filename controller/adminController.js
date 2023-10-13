@@ -1,7 +1,6 @@
 const Admin = require('../models/Admin');
 const Category = require('../models/Category');
 const jwt = require('jsonwebtoken');
-const upload = multer({ storage: storage });
 const multer = require('multer');
 
 const adminController = {
@@ -72,7 +71,7 @@ const adminController = {
 
   // Create a new category (admin privilege required)
 
-// Configure multer to handle file uploads
+  // Configure multer to handle file uploads
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     // Path to store images
@@ -84,6 +83,8 @@ const storage = multer.diskStorage({
   },
 });
 
+// Create a new category (admin privilege required)
+const upload = multer({ storage: storage });
 
 // Update the route handler to handle file uploads
 app.post('/contest/categories', upload.single('categoryImage'), async (req, res) => {
