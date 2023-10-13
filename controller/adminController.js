@@ -81,12 +81,12 @@ const storage = multer.diskStorage({
   },
 });
 
-// Create a new category (admin privilege required)
-const upload = multer({ storage: storage });
+    // Create a new category (admin privilege required)
+    const upload = multer({ storage: storage });
 
-// Update the route handler to handle file uploads
-app.post('/contest/categories', upload.single('categoryImage'), async (req, res) => {
-  try {
+    // Update the route handler to handle file uploads
+    app.post('/contest/categories', upload.single('categoryImage'), async (req, res) => {
+    try {
     // Validate admin authentication
     const token = req.headers.authorization.split(' ')[1]; // Extract the token from the request header
     const decodedToken = jwt.verify(token, process.env.SECRET_KEY); // Verify the token
