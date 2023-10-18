@@ -43,7 +43,7 @@ const swaggerRoutes = require('./routes/swaggerRoutes');
 app.use('/api-docs', swaggerRoutes);
 
 // Middleware
-app.use(cors());
+app.use(cors({ origin: '*' }));
 app.use(loggerMiddleware); // Use logger middleware for logging requests and responses
 app.use(helmet());
 app.use(compression());
