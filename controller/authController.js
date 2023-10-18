@@ -44,50 +44,49 @@ const authController = {
     }
   },
 
-  // Contestant Signup
-  signupContestant: async (req, res) => {
-    try {
-      // Extract contestant registration data from the request body
-      const { name, age, contestName, imageUrl, category } = req.body;
+ // Contestant Signup
+signupContestant: async (req, res) => {
+  try {
+    // Extract contestant registration data from the request body
+    const { name, age, contestName, category } = req.body;
+    const image = req.files.image; // Access the uploaded image file
 
-        // Check if the name is already registered
-     const existingContestant = await Contestant.findOne({ name });
+    // Check if the name is already registered
+    const existingContestant = await Contestant.findOne({ name });
 
-     if (existingContestant) {
-       return res.status(400).json({ error: 'Contestant name is already registered.' });
-     }
-
-     // Extract the file path of the uploaded image
-     const file = req.files.image;
-
-     // Upload the image to Cloudinary
-     const result = await cloudinary.uploader.upload(file.tempFilePath);
-
-     // Create a new contestant
-     const newContestant = new Contestant({
-       name,
-       age,
-       contestName,
-       imageUrl,
-       category,
-     });
-
-     // Save the contestant to the database
-     await newContestant.save();
-
-     // Generate a JWT token for authentication
-     const token = jwt.sign({ contestantId: newContestant._id }, process.env.SECRET_KEY, {
-       expiresIn: '1h', // Set the expiration time for the token
-     });
-
-     // Send a response with the token
-     res.status(201).json({ token, contestantId: newContestant._id });
-   } catch (error) {
-     // Handle errors
-     console.error(error);
-     res.status(500).json({ error: 'An error occurred during contestant signup.' });
+    if (existingContestant) {
+      return res.status(400).json({ error: 'Contestant name is already registered.' });
     }
-  },
+
+    // Upload the image to Cloudinary
+    const result = await cloudinary.uploader.upload(image.tempFilePath);
+
+    // Create a new contestant
+    const newContestant = new Contestant({
+      name,
+      age,
+      contestName,
+      imageUrl: result.secure_url, // Store the secure URL of the uploaded image
+      category,
+    });
+
+    // Save the contestant to the database
+    await newContestant.save();
+
+    // Generate a JWT token for authentication
+    const token = jwt.sign({ contestantId: newContestant._id }, process.env.SECRET_KEY, {
+      expiresIn: '1h',
+    });
+
+    // Send a response with the token
+    res.status(201).json({ token, contestantId: newContestant._id });
+  } catch (error) {
+    // Handle errors
+    console.error(error);
+    res.status(500).json({ error: 'An error occurred during contestant signup.' });
+  }
+},
+
 
   // Voter Login
   loginVoter: async (req, res) => {
